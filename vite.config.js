@@ -11,4 +11,12 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   }
+
+  
 })
+
+module.exports = {
+  server: {
+    port: 8080 // porta que deseja usar
+  }
+}
