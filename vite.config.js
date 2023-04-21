@@ -15,8 +15,4 @@ export default defineConfig({
   
 })
 
-module.exports = {
-  server: {
-    port: 8080 // porta que deseja usar
-  }
-}
+
