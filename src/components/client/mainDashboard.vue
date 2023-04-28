@@ -1,5 +1,4 @@
-
- <template id="TheMain">
+<template id="TheMain">
   <!-- Page Wrapper -->
   <div id="wrapper">
     <!-- Sidebar -->
@@ -12,10 +11,14 @@
         class="sidebar-brand d-flex align-items-center justify-content-center"
         href="#"
       >
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+        <div class="sidebar-brand-text mx-3">
+          <img
+            src="../../assets/img/logo.png"
+            style="width: 200px"
+            class="img-fluid"
+            alt=""
+          />
         </div>
-        <div class="sidebar-brand-text mx-3"></div>
       </a>
 
       <!-- Divider -->
@@ -135,9 +138,62 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-3">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-success">
+                    <i class="fa fa-check"></i>
+                    Total de pedidos Realizados
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <h1 class="text-center"><strong>051</strong></h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-warning">
+                    <i class="fa fa-check"></i>
+                    Pedidos hoje
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <h1 class="text-center"><strong>000</strong></h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-info">
+                    <i class="fa fa-check"></i>
+                    Pedido esta semana
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <h1 class="text-center"><strong>000</strong></h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-secondary">
+                    <i class="fa fa-check"></i>
+                    Pedidos este Mês
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <h1 class="text-center"><strong>000</strong></h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">
@@ -159,6 +215,33 @@
                         />
                       </div>
                     </div>
+                    
+                    <div class="row">
+                      <div class="col-md-9">
+                        <div class="form-group">
+                      <input
+                        type="text"
+                        required
+                        class="form-control form-control-user"
+                        id="endereco"
+                        v-model="endereco"
+                        placeholder="Qual o endereço da entrega?"
+                      />
+                    </div>
+                      </div>
+                      <div class="col-md-3"> <div class="form-group">
+                      <input
+                        type="number"
+
+                        required
+                        class="form-control form-control-user"
+                        id="numero"
+                        v-model="numero"
+                        placeholder="Número"
+                      />
+                    </div></div>
+                    </div>
+
                     <div class="form-group">
                       <input
                         type="text"
@@ -170,22 +253,14 @@
                         placeholder="Digite o CEP da entrega"
                       />
                     </div>
-                    <div class="form-group">
-                      <input
-                        type="text"
-                        required
-                        class="form-control form-control-user"
-                        id="endereco"
-                        v-model="endereco"
-                        placeholder="Qual o endereço da entrega?"
-                      />
-                    </div>
+                   
                     <div class="form-group">
                       <input
                         type="text"
                         required
                         class="form-control form-control-user"
                         id="telefone"
+                        maxlength="11"
                         v-model="telefone"
                         placeholder="Qual o telefone do cliente?"
                       />
@@ -197,11 +272,11 @@
                           required
                           class="form-control form-control-user"
                           id="valor"
-                          placeholder="Quanto custa essa entrega?"
+                          placeholder="Valor do Pedido"
                           v-model="senha"
                         />
                       </div>
-                      <div class="col-sm-3 mt-3">
+                      <div class="col-sm-2 mt-3">
                         <div class="form-check">
                           <input
                             class="form-check-input"
@@ -215,25 +290,43 @@
                             class="form-check-label"
                             for="flexRadioDefault1"
                           >
-                            Crédito
+                            Cartão
                           </label>
                         </div>
                       </div>
-                      <div class="col-sm-3 mt-3">
+                      <div class="col-sm-2 mt-3">
                         <div class="form-check">
                           <input
                             class="form-check-input"
                             type="radio"
                             name="flexRadioDefault"
                             id="flexRadioDefault1"
-                            value="Débito"
+                            value="Cartão"
                             v-model="opcaoEscolhida"
                           />
                           <label
                             class="form-check-label"
                             for="flexRadioDefault1"
                           >
-                            Débito
+                            Dinheiro
+                          </label>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 mt-3">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="flexRadioDefault"
+                            id="flexRadioDefault1"
+                            value="Dinheiro"
+                            v-model="opcaoEscolhida"
+                          />
+                          <label
+                            class="form-check-label"
+                            for="flexRadioDefault1"
+                          >
+                            Pago
                           </label>
                         </div>
                       </div>
@@ -260,15 +353,17 @@
               </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-2"></div>
+
+            <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">
                     <i class="fa fa-list"></i>
-                    Meus Pedido
+                    Meus Pedidos
                   </h6>
                 </div>
-                <div class="card-body" style="height: 415px; overflow-y: auto;">
+                <div class="card-body" style="height: 415px; overflow-y: auto">
                   <div class="table-responsive">
                     <table
                       class="table table-bordered"
@@ -279,25 +374,27 @@
                       <thead>
                         <tr>
                           <th>Cliente</th>
-                          <th>CEP</th>
+                          <th>Endereço</th>
+                          
                           <th>Telefone</th>
                           <th>Status</th>
                           <th>Valor</th>
-                          <th>Tipo</th>
+                          <th>Método</th>
+                          <th>Entregador</th>
                         </tr>
                       </thead>
 
                       <tbody>
                         <tr v-for="pedido in pedidos" :key="pedido.idpedidos">
                           <td>{{ pedido.nome_cliente }}</td>
-                          <td>{{ pedido.cep }}</td>
+                          <td>{{ pedido.endereco_entrega }}</td>
                           <td>{{ pedido.telefone1 }}</td>
-                          <td v-if="pedido.id_status == 3">
+                          <td v-if="pedido.id_status == 4">
                             <span class="badge bg-warning text-white">
                               Aguardando
                             </span>
                           </td>
-                          <td v-if="pedido.id_status == 4">
+                          <td v-if="pedido.id_status == 9">
                             <span class="badge bg-info text-white">
                               Em andamento
                             </span>
@@ -307,8 +404,9 @@
                               Entregue
                             </span>
                           </td>
-                          <td>{{ pedido.valor_pedido }}</td>
+                          <td>R$ {{ pedido.valor_pedido }}</td>
                           <td>{{ pedido.metodo_pagamento }}</td>
+                          <td>Ragner Moura</td>
                         </tr>
                       </tbody>
                     </table>
@@ -380,78 +478,78 @@
 </template>
 
 <script>
-import api from '../../../services/pedido/index'
-import VueJwtDecode from 'vue-jwt-decode'
+import api from "../../../services/pedido/index";
+import VueJwtDecode from "vue-jwt-decode";
 
 export default {
-  name: 'TheMain',
+  name: "TheMain",
   data() {
     return {
-      cep: '',
-      endereco: '',
-      opcaoEscolhida: '',
+      cep: "",
+      endereco: "",
+      opcaoEscolhida: "",
       pedidos: [],
-    }
+    };
   },
 
   mounted() {
-    let token = localStorage.getItem('token')
-    let decode = VueJwtDecode.decode(token)
+    let token = localStorage.getItem("token");
+    let decode = VueJwtDecode.decode(token);
 
-    let firstName = decode.nome
-    let lastName = decode.sobrenome
+    let firstName = decode.nome;
+    let lastName = decode.sobrenome;
 
-    let fullname = firstName + ' ' + lastName
+    let fullname = firstName + " " + lastName;
 
-    document.getElementById('name').innerHTML = fullname
+    document.getElementById("name").innerHTML = fullname;
 
     api
       .meusPedidos()
       .then((resposta) => {
-        this.pedidos = resposta.data.response
+        this.pedidos = resposta.data.response;
 
-        console.log(this.pedidos)
+        console.log(this.pedidos);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   },
 
   methods: {
     async buscarEndereco() {
       if (this.cep.length === 8) {
-        const url = `https://viacep.com.br/ws/${this.cep}/json/`
+        const url = `https://viacep.com.br/ws/${this.cep}/json/`;
 
         try {
-          const response = await fetch(url)
-          const data = await response.json()
+          const response = await fetch(url);
+          const data = await response.json();
 
           if (data.erro) {
-            console.error('CEP não encontrado')
+            console.error("CEP não encontrado");
           } else {
-            this.endereco = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`
+            this.endereco = `${data.logradouro}, ${data.bairro}, ${data.localidade} - ${data.uf}`;
           }
         } catch (error) {
-          console.error('Erro ao buscar CEP', error)
+          console.error("Erro ao buscar CEP", error);
         }
       }
     },
 
     handleOff() {
-      localStorage.clear()
-      window.location.href = '/'
+      localStorage.clear();
+      window.location.href = "/";
     },
 
     async handlePedido() {
-      let token = localStorage.getItem('token')
-      let decode = VueJwtDecode.decode(token)
-      let youId = decode.id_users
+      let token = localStorage.getItem("token");
+      let decode = VueJwtDecode.decode(token);
+      let youId = decode.id_users;
 
-      let youNome = document.getElementById('nome').value
-      let youCep = document.getElementById('cep').value
-      let youEndereco = document.getElementById('endereco').value
-      let youTelefone = document.getElementById('telefone').value
-      let youValor = document.getElementById('valor').value
-      let youType = this.opcaoEscolhida
-      let youStatus = 3
+      let youNome = document.getElementById("nome").value;
+      let youCep = document.getElementById("cep").value;
+      let youEndereco = document.getElementById("endereco").value;
+      let youTelefone = document.getElementById("telefone").value;
+      let youValor = document.getElementById("valor").value;
+      let youType = this.opcaoEscolhida;
+      let youStatus = 3;
 
       await api.pedido(
         youId,
@@ -461,10 +559,9 @@ export default {
         youTelefone,
         youValor,
         youType,
-        youStatus,
-      )
+        youStatus
+      );
     },
   },
-}
+};
 </script>
-

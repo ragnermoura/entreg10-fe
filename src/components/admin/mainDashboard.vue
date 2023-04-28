@@ -11,10 +11,15 @@
         class="sidebar-brand d-flex align-items-center justify-content-center"
         href="#"
       >
-        <div class="sidebar-brand-icon rotate-n-15">
-          <i class="fas fa-laugh-wink"></i>
+       
+        <div class="sidebar-brand-text mx-3">
+          <img
+            src="../../assets/img/logo.png"
+            style="width: 200px"
+            class="img-fluid"
+            alt=""
+          />
         </div>
-        <div class="sidebar-brand-text mx-3"></div>
       </a>
 
       <!-- Divider -->
@@ -23,13 +28,8 @@
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link" href="#">
-          <img
-            src="../../assets/img/logo1.jpeg"
-            style="width: 200px"
-            class="img-fluid"
-            alt=""
-          />
-          <span>Dashboard</span>
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span> Dashboard</span>
         </a>
       </li>
 
@@ -37,8 +37,15 @@
       <hr class="sidebar-divider" />
       <li class="nav-item">
         <a class="nav-link" href="#">
-          <i class="fas fa-fw fa-list"></i>
-          <span>Entregadores</span>
+          <i class="fas fa-motorcycle"></i>
+          <span> Entregadores</span>
+        </a>
+      </li>
+      <hr class="sidebar-divider" />
+      <li class="nav-item">
+        <a class="nav-link" href="#">
+          <i class="fa fa-store"></i>
+          <span> Clientes</span>
         </a>
       </li>
     </ul>
@@ -147,7 +154,65 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
           <div class="row">
-            <div class="col-lg-6">
+
+
+            <div class="col-lg-3">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-success">
+                    <i class="fa fa-check"></i>
+                    Total de pedidos Realizados
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <h1 class="text-center"><strong>051</strong></h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-warning">
+                    <i class="fa fa-check"></i>
+                    Pedidos hoje
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <h1 class="text-center"><strong>000</strong></h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-info">
+                    <i class="fa fa-check"></i>
+                    Pedido esta semana
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <h1 class="text-center"><strong>000</strong></h1>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-secondary">
+                    <i class="fa fa-check"></i>
+                    Pedidos este Mês
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <h1 class="text-center"><strong>000</strong></h1>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary">
@@ -165,13 +230,13 @@
                     >
                       <thead>
                         <tr>
-                          <th>Solicitante</th>
+                          <th>Empresa</th>
                           <th>Cliente</th>
-                          <th>CEP de entrega</th>
+                          <th>Endereço de entrega</th>
                           <th>Telefone</th>
                           <th>Status</th>
-                          <th>Valor dopedido</th>
-                          <th>Tipo</th>
+                          <th>Valor do pedido</th>
+                          <th>Método</th>
                           <th>Ação</th>
                         </tr>
                       </thead>
@@ -183,7 +248,7 @@
                         <tr>
                           <td>{{ pedido.nome }}</td>
                           <td>{{ pedido.nome_cliente }}</td>
-                          <td>{{ pedido.cep }}</td>
+                          <td>{{ pedido.endereco_pedido }}</td>
                           <td>{{ pedido.telefone1 }}</td>
                           <td v-if="pedido.id_status == 3">
                             <span class="badge bg-warning text-white">
@@ -200,7 +265,7 @@
                               Entregue
                             </span>
                           </td>
-                          <td>{{ pedido.valor_pedido }}</td>
+                          <td>R$ {{ pedido.valor_pedido }}</td>
                           <td>{{ pedido.metodo_pagamento }}</td>
                           <td>
                             <button
@@ -262,9 +327,9 @@
 
                                     <input
                                       type="text"
-                                      id="cep"
+                                      id="Endereço"
                                       hidden
-                                      v-model="pedido.cep"
+                                      v-model="pedido.Endereço"
                                     />
 
                                     <select
@@ -341,18 +406,19 @@
                       <thead>
                         <tr>
                           <th>Cliente</th>
-                          <th>CEP de entrega</th>
+                          <th>Endereço de entrega</th>
                           <th>Telefone</th>
                           <th>Status</th>
-                          <th>Valor dopedido</th>
-                          <th>Tipo</th>
+                          <th>Valor do pedido</th>
+                          <th>Método</th>
+                          <th>Entregador</th>
                         </tr>
                       </thead>
 
                       <tbody v-for="fila in filas" :key="fila.idpedidos">
                         <tr>
                           <td>{{ fila.nome_cliente }}</td>
-                          <td>{{ fila.cep }}</td>
+                          <td>{{ fila.endereco_pedido }}</td>
                           <td>{{ fila.telefone1 }}</td>
                           <td>
                             <span class="badge bg-warning text-white">
@@ -360,8 +426,9 @@
                             </span>
                           </td>
 
-                          <td>{{ fila.valor_pedido }}</td>
+                          <td>R$ {{ fila.valor_pedido }}</td>
                           <td>{{ fila.metodo_pagamento }}</td>
+                          <td>Ragner Moura</td>
                         </tr>
                       </tbody>
                     </table>
@@ -370,12 +437,12 @@
               </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-info">
                     <i class="fa fa-list"></i>
-                    Pedidos em andamento (Comentregador definido)
+                    Pedidos em andamento (Com entregador definido)
                   </h6>
                 </div>
                 <div class="card-body" style="height: 415px; overflow-y: auto">
@@ -389,11 +456,12 @@
                       <thead>
                         <tr>
                           <th>Cliente</th>
-                          <th>CEP de entrega</th>
+                          <th>Endereço de entrega</th>
                           <th>Telefone</th>
                           <th>Status</th>
-                          <th>Valor dopedido</th>
-                          <th>Tipo</th>
+                          <th>Valor do pedido</th>
+                          <th>Método</th>
+                          <th>Entregador</th>
                         </tr>
                       </thead>
 
@@ -403,7 +471,7 @@
                       >
                         <tr>
                           <td>{{ andamento.nome_cliente }}</td>
-                          <td>{{ andamento.cep }}</td>
+                          <td>{{ andamento.endereco_pedido }}</td>
                           <td>{{ andamento.telefone1 }}</td>
                           <td>
                             <span class="badge bg-info text-white">
@@ -411,8 +479,9 @@
                             </span>
                           </td>
 
-                          <td>{{ andamento.valor_pedido }}</td>
+                          <td>R$ {{ andamento.valor_pedido }}</td>
                           <td>{{ andamento.metodo_pagamento }}</td>
+                          <td>Ragner Moura</td>
                         </tr>
                       </tbody>
                     </table>
@@ -421,7 +490,7 @@
               </div>
             </div>
 
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-success">
@@ -440,11 +509,12 @@
                       <thead>
                         <tr>
                           <th>Cliente</th>
-                          <th>CEP de entrega</th>
+                          <th>Endereço de entrega</th>
                           <th>Telefone</th>
                           <th>Status</th>
-                          <th>Valor dopedido</th>
-                          <th>Tipo</th>
+                          <th>Valor do pedido</th>
+                          <th>Método</th>
+                          <th>Entregador</th>
                         </tr>
                       </thead>
 
@@ -454,7 +524,7 @@
                       >
                         <tr>
                           <td>{{ entregue.nome_cliente }}</td>
-                          <td>{{ entregue.cep }}</td>
+                          <td>{{ entregue.endereco_pedido }}</td>
                           <td>{{ entregue.telefone1 }}</td>
                           <td>
                             <span class="badge bg-success text-white">
@@ -464,6 +534,7 @@
 
                           <td>{{ entregue.valor_pedido }}</td>
                           <td>{{ entregue.metodo_pagamento }}</td>
+                          <td>Ragner Moura</td>
                         </tr>
                       </tbody>
                     </table>
@@ -542,7 +613,7 @@ export default {
   name: "TheMain",
   data() {
     return {
-      cep: "",
+      Endereço: "",
       endereco: "",
       opcaoEscolhida: "",
       meuspedidos: [],
@@ -640,11 +711,11 @@ export default {
       let youIdEntregador = document.getElementById("idEntregador").value;
       let youIdPedido = document.getElementById("idpedido").value;
       let youEndereco = document.getElementById("endereco").value;
-      let youCep = document.getElementById("cep").value;
+      let youEndereço = document.getElementById("Endereço").value;
 
       localStorage.setItem("id_entregador", youIdEntregador);
       localStorage.setItem("endereco", youEndereco);
-      localStorage.setItem("cep", youCep);
+      localStorage.setItem("Endereço", youEndereço);
 
       await api.editPedido(youIdEntregador, youIdPedido, youStatus);
     },
