@@ -222,7 +222,7 @@ export default {
         youStatus
       )
        await api.statusUser(youStatus, youId).then((resposta) => {
-       console.log(resposta)
+       
        })
     },
   },

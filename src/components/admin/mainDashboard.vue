@@ -23,7 +23,12 @@
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link" href="#">
-          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <img
+            src="../../assets/img/logo1.jpeg"
+            style="width: 200px"
+            class="img-fluid"
+            alt=""
+          />
           <span>Dashboard</span>
         </a>
       </li>
@@ -150,7 +155,7 @@
                     Pedidos (Em aberto)
                   </h6>
                 </div>
-                <div class="card-body" style="height: auto; overflow-y: auto;">
+                <div class="card-body" style="height: auto; overflow-y: auto">
                   <div class="table-responsive">
                     <table
                       class="table table-bordered"
@@ -317,7 +322,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-warning">
@@ -325,7 +330,7 @@
                     Pedidos recebidos (Na Fila aguardando entregador)
                   </h6>
                 </div>
-                <div class="card-body" style="height: 415px; overflow-y: auto;">
+                <div class="card-body" style="height: 415px; overflow-y: auto">
                   <div class="table-responsive">
                     <table
                       class="table table-bordered"
@@ -373,7 +378,7 @@
                     Pedidos em andamento (Comentregador definido)
                   </h6>
                 </div>
-                <div class="card-body" style="height: 415px; overflow-y: auto;">
+                <div class="card-body" style="height: 415px; overflow-y: auto">
                   <div class="table-responsive">
                     <table
                       class="table table-bordered"
@@ -424,7 +429,7 @@
                     Pedidos entregue (Pedidos entregues)
                   </h6>
                 </div>
-                <div class="card-body" style="height: 415px; overflow-y: auto;">
+                <div class="card-body" style="height: 415px; overflow-y: auto">
                   <div class="table-responsive">
                     <table
                       class="table table-bordered"
@@ -530,119 +535,119 @@
 </template>
 
 <script>
-import api from '../../../services/pedido/index'
-import VueJwtDecode from 'vue-jwt-decode'
+import api from "../../../services/pedido/index";
+import VueJwtDecode from "vue-jwt-decode";
 
 export default {
-  name: 'TheMain',
+  name: "TheMain",
   data() {
     return {
-      cep: '',
-      endereco: '',
-      opcaoEscolhida: '',
+      cep: "",
+      endereco: "",
+      opcaoEscolhida: "",
       meuspedidos: [],
       entregadores: [],
       filas: [],
       andamentos: [],
       entregues: [],
-    }
+    };
   },
 
   mounted() {
-    let token = localStorage.getItem('token')
-    let decode = VueJwtDecode.decode(token)
+    let token = localStorage.getItem("token");
+    let decode = VueJwtDecode.decode(token);
 
-    let firstName = decode.nome
-    let lastName = decode.sobrenome
+    let firstName = decode.nome;
+    let lastName = decode.sobrenome;
 
-    let fullname = firstName + ' ' + lastName
+    let fullname = firstName + " " + lastName;
 
-    document.getElementById('name').innerHTML = fullname
+    document.getElementById("name").innerHTML = fullname;
 
     api
       .dadosEntregador()
       .then((resposta) => {
-        const telefone = resposta.data.response[0].telefone1
+        const telefone = resposta.data.response[0].telefone1;
 
-        const UserID = 'ede2dbb2-5f2c-4de1-a9a5-64b6820d5d31'
-        const Token = '79837457'
+        const UserID = "ede2dbb2-5f2c-4de1-a9a5-64b6820d5d31";
+        const Token = "79837457";
 
         // número destino - 2 dígitos código do país (Brasil = 55) + 2 dígitos código de área + número do celular
-        const destino = `55${telefone}`
+        const destino = `55${telefone}`;
 
         // mensagem a ser enviada
-        let mensagem =`Olá, você tem uma nova entrega. Obrigado!`
+        let mensagem = `Olá, você tem uma nova entrega. Obrigado!`;
 
         // Codifica a mensagem - URLEncode
-        mensagem = encodeURIComponent(mensagem)
+        mensagem = encodeURIComponent(mensagem);
 
         // Monta a URL para acionar o Gateway
-        const URLGateway = `http://web.misterpostman.com.br/gateway.aspx?UserID=${UserID}&Token=${Token}&NroDestino=${destino}&Mensagem=${mensagem}`
+        const URLGateway = `http://web.misterpostman.com.br/gateway.aspx?UserID=${UserID}&Token=${Token}&NroDestino=${destino}&Mensagem=${mensagem}`;
 
         // Aciona o Gateway - Opção ideal para JavaScript
         fetch(URLGateway)
           .then((response) => response.text())
-          .then((data) => console.log(data))
+          .then((data) => console.log(data));
 
-          localStorage.removeItem('id_entregador')
+        localStorage.removeItem("id_entregador");
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
 
     api
       .pedidosAberto()
       .then((resposta) => {
-        this.meuspedidos = resposta.data.response
+        this.meuspedidos = resposta.data.response;
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
 
     api
       .andamento()
       .then((resposta) => {
-        this.andamentos = resposta.data.response
+        this.andamentos = resposta.data.response;
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
 
     api
       .fila()
       .then((resposta) => {
-        this.filas = resposta.data.response
+        this.filas = resposta.data.response;
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
 
     api
       .entregue()
       .then((resposta) => {
-        this.entregues = resposta.data.response
+        this.entregues = resposta.data.response;
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
 
     api
       .entregadores()
       .then((resposta) => {
-        this.entregadores = resposta.data.response
+        this.entregadores = resposta.data.response;
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err));
   },
 
   methods: {
     handleOff() {
-      localStorage.clear()
-      window.location.href = '/'
+      localStorage.clear();
+      window.location.href = "/";
     },
 
     async handlePedido() {
-      let youStatus = 4
-      let youIdEntregador = document.getElementById('idEntregador').value
-      let youIdPedido = document.getElementById('idpedido').value
-      let youEndereco = document.getElementById('endereco').value
-      let youCep = document.getElementById('cep').value
+      let youStatus = 4;
+      let youIdEntregador = document.getElementById("idEntregador").value;
+      let youIdPedido = document.getElementById("idpedido").value;
+      let youEndereco = document.getElementById("endereco").value;
+      let youCep = document.getElementById("cep").value;
 
-      localStorage.setItem('id_entregador', youIdEntregador)
-      localStorage.setItem('endereco', youEndereco)
-      localStorage.setItem('cep', youCep)
+      localStorage.setItem("id_entregador", youIdEntregador);
+      localStorage.setItem("endereco", youEndereco);
+      localStorage.setItem("cep", youCep);
 
-      await api.editPedido(youIdEntregador, youIdPedido, youStatus)
+      await api.editPedido(youIdEntregador, youIdPedido, youStatus);
     },
   },
-}
+};
 </script>

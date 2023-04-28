@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8" />
+    
     <link rel="icon" href="/favicon.ico" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport"  content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Vite App</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Entreg10</title>
+    <script>
+      // Define a função que será executada a cada 30 segundos
+      function atualizarPagina() {
+        location.reload();
+      }
+      // Define o intervalo de 30 segundos usando setInterval()
+      setInterval(atualizarPagina, 30000); // 30 segundos em milissegundos
+    </script>
     <!-- Custom fonts for this template-->
     <link
       href="./src/assets/vendor/fontawesome-free/css/all.min.css"
@@ -24,14 +36,28 @@
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
     <!-- Bootstrap core JavaScript-->
-    <script src="./src/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="./src/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.4.min.js"
+      integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.bundle.min.js"
+    ></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="./src/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"
+      integrity="sha512-0QbL0ph8Tc8g5bLhfVzSqxe9GERORsKhIn1IrpxDAgUsbBGz/V7iSav2zzW325XGd1OMLdL4UiqRJj702IeqnQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="./src/assets/js/sb-admin-2.min.js"></script>
-      
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/js/sb-admin-2.min.js"
+    ></script>
   </body>
 </html>

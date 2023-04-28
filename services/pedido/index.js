@@ -36,7 +36,10 @@ export default {
         }
       )
       .then((response) => {
-        window.location.href = "/dashboard-client";
+
+
+
+        window.location.href = "/#/dashboard-client";
       })
       .catch((error) => {
         console.log("Error ========>", error);
@@ -122,7 +125,34 @@ export default {
         }
       )
       .then((response) => {
-        window.location.href = "";
+        window.location.href = "/#/dashboard-admin";
+      })
+      .catch((error) => {
+        console.log("Error ========>", error);
+      });
+  },
+
+  editPedido2: (youIdEntregador, youIdPedido, youStatus) => {
+    http
+      .patch(
+        "/pedido/edit/",
+        {
+          id_status: youStatus,
+          id_entregador: youIdEntregador,
+          id_pedidos: youIdPedido,
+        },
+
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+          },
+        }
+      )
+      .then((response) => {
+        window.location.href = "/#/dashboard-entregador";
       })
       .catch((error) => {
         console.log("Error ========>", error);

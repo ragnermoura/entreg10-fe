@@ -26,19 +26,19 @@ export default {
         let decode = VueJwtDecode.decode(token);
 
         if (decode.id_status == 3 && decode.id_nivel == 2) {
-          window.location.href = "/dashboard-client-perfil";
+          window.location.href = "/#/dashboard-client-perfil";
         }
         if (decode.id_status == 1 && decode.id_nivel== 2) {
-          window.location.href = "/dashboard-client";
+          window.location.href = "/#/dashboard-client";
         }
         if (decode.id_status == 1 && decode.id_nivel == 1) {
-          window.location.href = "/dashboard-admin";
+          window.location.href = "/#/dashboard-admin";
         }
         if (decode.id_status == 3 && decode.id_nivel == 3) {
-          window.location.href = "/dashboard-entregador-perfil";
+          window.location.href = "/#/dashboard-entregador-perfil";
         }
         if (decode.id_status == 1 && decode.id_nivel == 3) {
-          window.location.href = "/dashboard-entregador";
+          window.location.href = "/#/dashboard-entregador";
         }
       })
       .catch((error) => {
@@ -138,7 +138,7 @@ export default {
         }
       )
       .then((response) => {
-        window.location.href = "/dashboard-client";
+        window.location.href = "/#/dashboard-client";
       })
       .catch((error) => {
         console.log("Error ========>", error);
@@ -183,7 +183,7 @@ export default {
         }
       )
       .then((response) => {
-        window.location.href = "/dashboard-entregador";
+        window.location.href = "/#/dashboard-entregador";
       })
       .catch((error) => {
         console.log("Error ========>", error);

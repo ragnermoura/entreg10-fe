@@ -301,7 +301,7 @@ export default {
       let youIdEntregador = decode.id_users
 
 
-      await api.editPedido(youIdEntregador, youIdPedido, youStatus)
+      await api.editPedido2(youIdEntregador, youIdPedido, youStatus)
     },
   },
 }
