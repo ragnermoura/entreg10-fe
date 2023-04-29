@@ -4,6 +4,8 @@ import RegisterView from '../views/auth/RegisterView.vue'
 import ClientView from '../views/client/DashboardView.vue'
 
 import AdminView from '../views/admin/DashboardView.vue'
+import ListEntregadoresView from '../views/admin/ListEntregadores.vue'
+import ListClientesView from '../views/admin/ListClientes.vue'
 import EntregadorView from '../views/entregador/DashboardView.vue'
 import ClientPerfilView from '../views/client/PerfilView.vue'
 import EntregadorPerfilView from '../views/entregador/PerfilView.vue'
@@ -26,6 +28,17 @@ const router = createRouter({
       path: '/dashboard-admin',
       name: 'dashboard-admin',
       component: AdminView
+    },
+
+    {
+      path: '/list-entregadores',
+      name: 'list-entregadores',
+      component: ListEntregadoresView
+    },
+    {
+      path: '/list-clientes',
+      name: 'list-clientes',
+      component: ListClientesView
     },
     {
       path: '/dashboard-client',

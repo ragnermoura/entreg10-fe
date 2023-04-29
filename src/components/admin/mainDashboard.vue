@@ -11,7 +11,6 @@
         class="sidebar-brand d-flex align-items-center justify-content-center"
         href="#"
       >
-       
         <div class="sidebar-brand-text mx-3">
           <img
             src="../../assets/img/logo.png"
@@ -26,8 +25,8 @@
       <hr class="sidebar-divider my-0" />
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
-        <a class="nav-link" href="#">
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard-admin">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span> Dashboard</span>
         </a>
@@ -36,14 +35,14 @@
       <!-- Divider -->
       <hr class="sidebar-divider" />
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/#/list-entregadores">
           <i class="fas fa-motorcycle"></i>
           <span> Entregadores</span>
         </a>
       </li>
       <hr class="sidebar-divider" />
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/#/list-clientes">
           <i class="fa fa-store"></i>
           <span> Clientes</span>
         </a>
@@ -154,8 +153,6 @@
           <!-- Page Heading -->
           <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
           <div class="row">
-
-
             <div class="col-lg-3">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -208,9 +205,6 @@
                 </div>
               </div>
             </div>
-
-
-
 
             <div class="col-lg-12">
               <div class="card shadow mb-4">
@@ -698,6 +692,32 @@ export default {
         this.entregadores = resposta.data.response;
       })
       .catch((err) => console.log(err));
+
+
+
+
+
+      
+
+    // Endereço para obter as coordenadas de latitude e longitude
+    const endereco = "Empire State Building";
+
+    // URL da API de Geocodificação do Google Maps
+    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${endereco}&key=SUA_CHAVE_DE_API`;
+
+    // Fazer uma requisição HTTP GET para a API
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => {
+        // Extrair as coordenadas de latitude e longitude da resposta JSON
+        const latitude = data.results[0].geometry.location.lat;
+        const longitude = data.results[0].geometry.location.lng;
+
+        // Gerar um link para o Google Maps
+        const link = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+        console.log(link);
+      })
+      .catch((error) => console.error(error));
   },
 
   methods: {

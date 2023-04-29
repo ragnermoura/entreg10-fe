@@ -281,7 +281,7 @@
                           <input
                             class="form-check-input"
                             type="radio"
-                            value="Crédito"
+                            value="Cartão"
                             v-model="opcaoEscolhida"
                             name="flexRadioDefault"
                             id="flexRadioDefault1"
@@ -301,7 +301,7 @@
                             type="radio"
                             name="flexRadioDefault"
                             id="flexRadioDefault1"
-                            value="Cartão"
+                            value="Dinheiro"
                             v-model="opcaoEscolhida"
                           />
                           <label
@@ -319,7 +319,7 @@
                             type="radio"
                             name="flexRadioDefault"
                             id="flexRadioDefault1"
-                            value="Dinheiro"
+                            value="Pago"
                             v-model="opcaoEscolhida"
                           />
                           <label
@@ -546,6 +546,7 @@ export default {
       let youNome = document.getElementById("nome").value;
       let youCep = document.getElementById("cep").value;
       let youEndereco = document.getElementById("endereco").value;
+      let youNumero = document.getElementById("numero").value;
       let youTelefone = document.getElementById("telefone").value;
       let youValor = document.getElementById("valor").value;
       let youType = this.opcaoEscolhida;
@@ -556,6 +557,7 @@ export default {
         youNome,
         youCep,
         youEndereco,
+        youNumero,
         youTelefone,
         youValor,
         youType,

@@ -7,6 +7,7 @@ export default {
     youNome,
     youCep,
     youEndereco,
+    youNumero,
     youTelefone,
     youValor,
     youType,
@@ -18,6 +19,7 @@ export default {
         {
           nome: youNome,
           endereco: youEndereco,
+          numero: youNumero,
           cep: youCep,
           telefone: youTelefone,
           valor: youValor,
