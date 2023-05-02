@@ -38,9 +38,6 @@ export default {
         }
       )
       .then((response) => {
-
-
-
         window.location.href = "/#/dashboard-client";
       })
       .catch((error) => {

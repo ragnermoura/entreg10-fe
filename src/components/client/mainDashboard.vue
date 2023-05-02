@@ -554,7 +554,7 @@ export default {
       let youTelefone = document.getElementById("telefone").value;
       let youValor = document.getElementById("valor").value;
       let youType = this.opcaoEscolhida;
-      let youStatus = 3;
+      let youStatus = 4;
 
       await api.pedido(
         youId,
@@ -567,6 +567,8 @@ export default {
         youType,
         youStatus
       );
+
+      window.location.href = "/#/dashboard-client";
     },
   },
 };

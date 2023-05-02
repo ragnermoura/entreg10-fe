@@ -579,7 +579,7 @@ export default {
   mounted() {
     let token = localStorage.getItem("token");
     let decode = VueJwtDecode.decode(token);
-    console.log(decode)
+    
     let firstName = decode.nome;
     let lastName = decode.sobrenome;
     let fullname = firstName + " " + lastName;
@@ -680,7 +680,6 @@ export default {
 
       await api.editPedido(youIdEntregador, youIdPedido, youStatus);
 
-      window.location.reload();
     },
   },
 };
