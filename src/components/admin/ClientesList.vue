@@ -219,21 +219,29 @@
                             <th>Segmento</th>
                             <th>Responsável</th>
                             <th>Status</th>
-                            <th>Ação</th>
                           </tr>
                         </thead>
   
                         <tbody>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                          <tr v-for="cliente in clientes" >
+                            <td>{{ cliente.razao_social }}</td>
+                            <td>{{ cliente.cnpj }}</td>
+                            <td>{{ cliente.email}}</td>
+                            <td>{{ cliente.telefone1 }}</td>
+                            <td>{{ cliente.endereco }}</td>
+                            <td>{{ cliente.label }}</td>
+                            <td>{{ cliente.nome }}</td>
+                            <td v-if="cliente.id_status_user == 1">
+                            <span class="badge bg-success text-white">
+                              Ativo
+                            </span>
+                          </td>
+                          <td v-if="cliente.id_status_user == 2">
+                            <span class="badge bg-danger text-white">
+                              Bloqueado
+                            </span>
+                          </td>
+                            
                           </tr>
                         </tbody>
                       </table>
@@ -305,21 +313,14 @@
   </template>
   
   <script>
-  import api from "../../../services/pedido/index";
+import api from '../../../services/clientes/index'
   import VueJwtDecode from "vue-jwt-decode";
   
   export default {
     name: "Clientes",
     data() {
       return {
-        Endereço: "",
-        endereco: "",
-        opcaoEscolhida: "",
-        meuspedidos: [],
-        Clientes: [],
-        filas: [],
-        andamentos: [],
-        entregues: [],
+        clientes: []
       };
     },
   
@@ -333,90 +334,16 @@
       let fullname = firstName + " " + lastName;
   
       document.getElementById("name").innerHTML = fullname;
+
+      api.all().then((resposta) => {
+        this.clientes = resposta.data.response;
+
+        console.log(this.clientes)
+
+        
+      })
   
-      api
-        .dadosEntregador()
-        .then((resposta) => {
-          const telefone = resposta.data.response[0].telefone1;
-  
-          const UserID = "ede2dbb2-5f2c-4de1-a9a5-64b6820d5d31";
-          const Token = "79837457";
-  
-          // número destino - 2 dígitos código do país (Brasil = 55) + 2 dígitos código de área + número do celular
-          const destino = `55${telefone}`;
-  
-          // mensagem a ser enviada
-          let mensagem = `Olá, você tem uma nova entrega. Obrigado!`;
-  
-          // Codifica a mensagem - URLEncode
-          mensagem = encodeURIComponent(mensagem);
-  
-          // Monta a URL para acionar o Gateway
-          const URLGateway = `http://web.misterpostman.com.br/gateway.aspx?UserID=${UserID}&Token=${Token}&NroDestino=${destino}&Mensagem=${mensagem}`;
-  
-          // Aciona o Gateway - Opção ideal para JavaScript
-          fetch(URLGateway)
-            .then((response) => response.text())
-            .then((data) => console.log(data));
-  
-          localStorage.removeItem("id_entregador");
-        })
-        .catch((err) => console.log(err));
-  
-      api
-        .pedidosAberto()
-        .then((resposta) => {
-          this.meuspedidos = resposta.data.response;
-        })
-        .catch((err) => console.log(err));
-  
-      api
-        .andamento()
-        .then((resposta) => {
-          this.andamentos = resposta.data.response;
-        })
-        .catch((err) => console.log(err));
-  
-      api
-        .fila()
-        .then((resposta) => {
-          this.filas = resposta.data.response;
-        })
-        .catch((err) => console.log(err));
-  
-      api
-        .entregue()
-        .then((resposta) => {
-          this.entregues = resposta.data.response;
-        })
-        .catch((err) => console.log(err));
-  
-      api
-        .Clientes()
-        .then((resposta) => {
-          this.Clientes = resposta.data.response;
-        })
-        .catch((err) => console.log(err));
-  
-      // Endereço para obter as coordenadas de latitude e longitude
-      const endereco = "Empire State Building";
-  
-      // URL da API de Geocodificação do Google Maps
-      const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${endereco}&key=SUA_CHAVE_DE_API`;
-  
-      // Fazer uma requisição HTTP GET para a API
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          // Extrair as coordenadas de latitude e longitude da resposta JSON
-          const latitude = data.results[0].geometry.location.lat;
-          const longitude = data.results[0].geometry.location.lng;
-  
-          // Gerar um link para o Google Maps
-          const link = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-          console.log(link);
-        })
-        .catch((error) => console.error(error));
+     
     },
   
     methods: {
@@ -425,19 +352,7 @@
         window.location.href = "/";
       },
   
-      async handlePedido() {
-        let youStatus = 4;
-        let youIdEntregador = document.getElementById("idEntregador").value;
-        let youIdPedido = document.getElementById("idpedido").value;
-        let youEndereco = document.getElementById("endereco").value;
-        let youEndereço = document.getElementById("Endereço").value;
-  
-        localStorage.setItem("id_entregador", youIdEntregador);
-        localStorage.setItem("endereco", youEndereco);
-        localStorage.setItem("Endereço", youEndereço);
-  
-        await api.editPedido(youIdEntregador, youIdPedido, youStatus);
-      },
+   
     },
   };
   </script>

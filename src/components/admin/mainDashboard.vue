@@ -26,7 +26,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="/dashboard-admin">
+        <a class="nav-link" href="/#/dashboard-admin">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span> Dashboard</span>
         </a>
@@ -205,7 +205,6 @@
                 </div>
               </div>
             </div>
-
             <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -242,19 +241,19 @@
                         <tr>
                           <td>{{ pedido.nome }}</td>
                           <td>{{ pedido.nome_cliente }}</td>
-                          <td>{{ pedido.endereco_pedido }}</td>
+                          <td>{{ pedido.endereco_entrega }}</td>
                           <td>{{ pedido.telefone1 }}</td>
-                          <td v-if="pedido.id_status == 3">
+                          <td v-if="pedido.id_status == 4">
                             <span class="badge bg-warning text-white">
                               Aguardando
                             </span>
                           </td>
-                          <td v-if="pedido.id_status == 4">
+                          <td v-if="pedido.id_status == 8">
                             <span class="badge bg-info text-white">
                               Em andamento
                             </span>
                           </td>
-                          <td v-if="pedido.id_status == 1">
+                          <td v-if="pedido.id_status == 5">
                             <span class="badge bg-success text-white">
                               Entregue
                             </span>
@@ -384,56 +383,6 @@
             <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-warning">
-                    <i class="fa fa-list"></i>
-                    Pedidos recebidos (Na Fila aguardando entregador)
-                  </h6>
-                </div>
-                <div class="card-body" style="height: 415px; overflow-y: auto">
-                  <div class="table-responsive">
-                    <table
-                      class="table table-bordered"
-                      id="dataTable"
-                      width="100%"
-                      cellspacing="0"
-                    >
-                      <thead>
-                        <tr>
-                          <th>Cliente</th>
-                          <th>Endereço de entrega</th>
-                          <th>Telefone</th>
-                          <th>Status</th>
-                          <th>Valor do pedido</th>
-                          <th>Método</th>
-                          <th>Entregador</th>
-                        </tr>
-                      </thead>
-
-                      <tbody v-for="fila in filas" :key="fila.idpedidos">
-                        <tr>
-                          <td>{{ fila.nome_cliente }}</td>
-                          <td>{{ fila.endereco_pedido }}</td>
-                          <td>{{ fila.telefone1 }}</td>
-                          <td>
-                            <span class="badge bg-warning text-white">
-                              Aguardando
-                            </span>
-                          </td>
-
-                          <td>R$ {{ fila.valor_pedido }}</td>
-                          <td>{{ fila.metodo_pagamento }}</td>
-                          <td>Ragner Moura</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-lg-12">
-              <div class="card shadow mb-4">
-                <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-info">
                     <i class="fa fa-list"></i>
                     Pedidos em andamento (Com entregador definido)
@@ -465,17 +414,27 @@
                       >
                         <tr>
                           <td>{{ andamento.nome_cliente }}</td>
-                          <td>{{ andamento.endereco_pedido }}</td>
+                          <td>{{ andamento.endereco_entrega }}</td>
                           <td>{{ andamento.telefone1 }}</td>
-                          <td>
+                          <td v-if="andamento.id_status == 10">
                             <span class="badge bg-info text-white">
-                              À caminho
+                              Aguardando aceite
+                            </span>
+                          </td>
+                          <td v-if="andamento.id_status == 8">
+                            <span class="badge bg-success text-white">
+                              Aceito e coletando
+                            </span>
+                          </td>
+                          <td v-if="andamento.id_status == 3">
+                            <span class="badge bg-success text-white">
+                              Em entrega
                             </span>
                           </td>
 
                           <td>R$ {{ andamento.valor_pedido }}</td>
                           <td>{{ andamento.metodo_pagamento }}</td>
-                          <td>Ragner Moura</td>
+                          <td>{{ andamento.nome }}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -483,7 +442,6 @@
                 </div>
               </div>
             </div>
-
             <div class="col-lg-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -518,7 +476,7 @@
                       >
                         <tr>
                           <td>{{ entregue.nome_cliente }}</td>
-                          <td>{{ entregue.endereco_pedido }}</td>
+                          <td>{{ entregue.endereco_entrega }}</td>
                           <td>{{ entregue.telefone1 }}</td>
                           <td>
                             <span class="badge bg-success text-white">
@@ -526,9 +484,9 @@
                             </span>
                           </td>
 
-                          <td>{{ entregue.valor_pedido }}</td>
+                          <td>R$ {{ entregue.valor_pedido }}</td>
                           <td>{{ entregue.metodo_pagamento }}</td>
-                          <td>Ragner Moura</td>
+                          <td>{{ entregue.nome }}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -621,13 +579,21 @@ export default {
   mounted() {
     let token = localStorage.getItem("token");
     let decode = VueJwtDecode.decode(token);
-
+    console.log(decode)
     let firstName = decode.nome;
     let lastName = decode.sobrenome;
-
     let fullname = firstName + " " + lastName;
 
     document.getElementById("name").innerHTML = fullname;
+
+    if(decode.id_nivel == 2){
+      window.location.href = "/#/dashboard-client"
+    }
+
+
+    setTimeout(function () {
+      location.reload();
+    }, 30000);
 
     api
       .dadosEntregador()
@@ -669,6 +635,7 @@ export default {
       .andamento()
       .then((resposta) => {
         this.andamentos = resposta.data.response;
+        console.log(this.andamentos)
       })
       .catch((err) => console.log(err));
 
@@ -692,32 +659,6 @@ export default {
         this.entregadores = resposta.data.response;
       })
       .catch((err) => console.log(err));
-
-
-
-
-
-      
-
-    // Endereço para obter as coordenadas de latitude e longitude
-    const endereco = "Empire State Building";
-
-    // URL da API de Geocodificação do Google Maps
-    const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${endereco}&key=SUA_CHAVE_DE_API`;
-
-    // Fazer uma requisição HTTP GET para a API
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        // Extrair as coordenadas de latitude e longitude da resposta JSON
-        const latitude = data.results[0].geometry.location.lat;
-        const longitude = data.results[0].geometry.location.lng;
-
-        // Gerar um link para o Google Maps
-        const link = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
-        console.log(link);
-      })
-      .catch((error) => console.error(error));
   },
 
   methods: {
@@ -727,7 +668,7 @@ export default {
     },
 
     async handlePedido() {
-      let youStatus = 4;
+      let youStatus = 10;
       let youIdEntregador = document.getElementById("idEntregador").value;
       let youIdPedido = document.getElementById("idpedido").value;
       let youEndereco = document.getElementById("endereco").value;
@@ -738,6 +679,8 @@ export default {
       localStorage.setItem("Endereço", youEndereço);
 
       await api.editPedido(youIdEntregador, youIdPedido, youStatus);
+
+      window.location.reload();
     },
   },
 };

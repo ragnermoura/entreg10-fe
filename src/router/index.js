@@ -6,9 +6,7 @@ import ClientView from '../views/client/DashboardView.vue'
 import AdminView from '../views/admin/DashboardView.vue'
 import ListEntregadoresView from '../views/admin/ListEntregadores.vue'
 import ListClientesView from '../views/admin/ListClientes.vue'
-import EntregadorView from '../views/entregador/DashboardView.vue'
 import ClientPerfilView from '../views/client/PerfilView.vue'
-import EntregadorPerfilView from '../views/entregador/PerfilView.vue'
 import SuccessView from '../views/client/SuccessView.vue'
 
 const router = createRouter({
@@ -46,19 +44,9 @@ const router = createRouter({
       component: ClientView
     },
     {
-      path: '/dashboard-entregador',
-      name: 'dashboard-entregador',
-      component: EntregadorView
-    },
-    {
       path: '/dashboard-client-perfil',
       name: 'dashboard-client-perfil',
       component: ClientPerfilView
-    },
-    {
-      path: '/dashboard-entregador-perfil',
-      name: 'dashboard-entregador-perfil',
-      component: EntregadorPerfilView
     },
     {
       path: '/success-count',

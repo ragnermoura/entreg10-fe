@@ -204,5 +204,36 @@ export default {
   },
 
 
+ totalHojeAdmin: () => {
+    return http.get("/pedido/hoje/admin", {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+    });
+  },
+
+  totalSemanaAdmin: () => {
+    return http.get("/pedido/semana/admin", {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+    });
+  },
+
+  totalMesAdmin: () => {
+    return http.get("/pedido/mes/admin", {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+    });
+  },
+
+
 
 };

@@ -26,7 +26,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/#/dashboard-client">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
         </a>
@@ -394,7 +394,7 @@
                               Aguardando
                             </span>
                           </td>
-                          <td v-if="pedido.id_status == 9">
+                          <td v-if="pedido.id_status == 10">
                             <span class="badge bg-info text-white">
                               Em andamento
                             </span>
@@ -406,7 +406,7 @@
                           </td>
                           <td>R$ {{ pedido.valor_pedido }}</td>
                           <td>{{ pedido.metodo_pagamento }}</td>
-                          <td>Ragner Moura</td>
+                          <td>{{ pedido.nome }}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -502,6 +502,10 @@ export default {
     let fullname = firstName + " " + lastName;
 
     document.getElementById("name").innerHTML = fullname;
+
+    if(decode.id_nivel == 3){
+      window.location.href = "/"
+    }
 
     api
       .meusPedidos()
