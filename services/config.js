@@ -2,5 +2,5 @@ import axios from "axios";
 export const http = axios.create({
     //baseURL: 'http://13.38.99.151:3000'
     //baseURL: 'https://entreg10.com.br/api'
-    baseURL: 'http://localhost:3000/api'
+    baseURL: 'https://api.entreg10.com.br/'
 })

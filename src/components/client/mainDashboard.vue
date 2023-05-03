@@ -162,7 +162,7 @@
                   </h6>
                 </div>
                 <div class="card-body">
-                  <h1 class="text-center"><strong>000</strong></h1>
+                  <h1 class="text-center"><strong>{{dia}}</strong></h1>
                 </div>
               </div>
             </div>
@@ -175,7 +175,7 @@
                   </h6>
                 </div>
                 <div class="card-body">
-                  <h1 class="text-center"><strong>000</strong></h1>
+                  <h1 class="text-center"><strong>{{semana}}</strong></h1>
                 </div>
               </div>
             </div>
@@ -188,7 +188,7 @@
                   </h6>
                 </div>
                 <div class="card-body">
-                  <h1 class="text-center"><strong>000</strong></h1>
+                  <h1 class="text-center"><strong>{{mes}}</strong></h1>
                 </div>
               </div>
             </div>
@@ -261,6 +261,7 @@
                         class="form-control form-control-user"
                         id="telefone"
                         maxlength="11"
+                        
                         v-model="telefone"
                         placeholder="Qual o telefone do cliente?"
                       />
@@ -481,6 +482,7 @@
 import api from "../../../services/pedido/index";
 import VueJwtDecode from "vue-jwt-decode";
 
+
 export default {
   name: "TheMain",
   data() {
@@ -489,6 +491,9 @@ export default {
       endereco: "",
       opcaoEscolhida: "",
       pedidos: [],
+      dia: 0,
+      semana: 0,
+      mes: 0
     };
   },
 
@@ -515,6 +520,28 @@ export default {
         console.log(this.pedidos);
       })
       .catch((err) => console.log(err));
+
+      api
+      .totalHojeClient(13)
+      .then((resposta) => {
+        this.dia = resposta.data.response;
+      })
+      .catch((err) => console.log(err));
+
+      api
+      .totalSemanaClient(13)
+      .then((resposta) => {
+        this.semana = resposta.data.response;
+      })
+      .catch((err) => console.log(err));
+
+      api
+      .totalMesClient(13)
+      .then((resposta) => {
+        this.mes = resposta.data.response;
+      })
+      .catch((err) => console.log(err));
+
   },
 
   methods: {
@@ -567,6 +594,9 @@ export default {
         youType,
         youStatus
       );
+
+      
+     
 
       window.location.href = "/#/dashboard-client";
     },

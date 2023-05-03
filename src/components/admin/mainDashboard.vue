@@ -175,7 +175,7 @@
                   </h6>
                 </div>
                 <div class="card-body">
-                  <h1 class="text-center"><strong>000</strong></h1>
+                  <h1 class="text-center"><strong>{{dia}}</strong></h1>
                 </div>
               </div>
             </div>
@@ -188,7 +188,7 @@
                   </h6>
                 </div>
                 <div class="card-body">
-                  <h1 class="text-center"><strong>000</strong></h1>
+                  <h1 class="text-center"><strong>{{semana}}</strong></h1>
                 </div>
               </div>
             </div>
@@ -201,7 +201,7 @@
                   </h6>
                 </div>
                 <div class="card-body">
-                  <h1 class="text-center"><strong>000</strong></h1>
+                  <h1 class="text-center"><strong>{{mes}}</strong></h1>
                 </div>
               </div>
             </div>
@@ -355,6 +355,7 @@
                                     </div>
 
                                     <button
+                                     
                                       type="submit"
                                       class="btn btn-success mt-3 mr-2"
                                     >
@@ -573,6 +574,9 @@ export default {
       filas: [],
       andamentos: [],
       entregues: [],
+      dia: 0,
+      semana: 0,
+      mes: 0
     };
   },
 
@@ -590,6 +594,7 @@ export default {
       window.location.href = "/#/dashboard-client"
     }
 
+    console.log('roder')
 
     setTimeout(function () {
       location.reload();
@@ -659,6 +664,30 @@ export default {
         this.entregadores = resposta.data.response;
       })
       .catch((err) => console.log(err));
+
+      api
+      .totalHojeAdmin()
+      .then((resposta) => {
+        this.dia = resposta.data.response;
+      })
+      .catch((err) => console.log(err));
+
+      api
+      .totalSemanaAdmin()
+      .then((resposta) => {
+        this.semana = resposta.data.response;
+      })
+      .catch((err) => console.log(err));
+
+      api
+      .totalMesAdmin()
+      .then((resposta) => {
+        this.mes = resposta.data.response;
+      })
+      .catch((err) => console.log(err));
+
+
+
   },
 
   methods: {
@@ -681,6 +710,7 @@ export default {
       await api.editPedido(youIdEntregador, youIdPedido, youStatus);
 
     },
+
   },
 };
 </script>

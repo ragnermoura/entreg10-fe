@@ -124,7 +124,8 @@ export default {
         }
       )
       .then((response) => {
-        window.location.href = "/#/dashboard-admin";
+        console.log(response)
+        window.location.reload();
       })
       .catch((error) => {
         console.log("Error ========>", error);
@@ -202,7 +203,7 @@ export default {
 
 
  totalHojeAdmin: () => {
-    return http.get("/pedido/hoje/admin", {
+    return http.get("/pedido/hoje/admin/1", {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Headers": "*",
@@ -212,7 +213,7 @@ export default {
   },
 
   totalSemanaAdmin: () => {
-    return http.get("/pedido/semana/admin", {
+    return http.get("/pedido/semana/admin/1", {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Headers": "*",
@@ -222,7 +223,37 @@ export default {
   },
 
   totalMesAdmin: () => {
-    return http.get("/pedido/mes/admin", {
+    return http.get("/pedido/mes/admin/1", {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+    });
+  },
+
+ totalHojeClient: (id_cliente) => {
+    return http.get(`/pedido/hoje/cliente/${id_cliente}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+    });
+  },
+
+  totalSemanaClient: (id_cliente) => {
+    return http.get(`/pedido/semana/cliente/${id_cliente}`, {
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Headers": "*",
+        "Access-Control-Allow-Methods": "OPTIONS,POST,GET",
+      },
+    });
+  },
+
+  totalMesClient: (id_cliente) => {
+    return http.get(`/pedido/mes/cliente/${id_cliente}`, {
       headers: {
         "Content-Type": "application/json",
         "Access-Control-Allow-Headers": "*",
